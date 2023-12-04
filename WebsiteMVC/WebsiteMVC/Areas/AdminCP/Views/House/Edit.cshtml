@@ -1,0 +1,180 @@
+﻿@model WebsiteMVC.Models.House
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-pencil"></i> @ViewBag.Title</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Edit", "House", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.IDHouse)
+                @Html.HiddenFor(model => model.State)
+
+                <h2>Thông tin chính</h2>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Code, "Mã", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">H</span>
+                            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", required = "true" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IDTaiKhoan, "Chuyên viên phụ trách", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(q => q.IDTaiKhoan, ViewBag.IDTaiKhoans as SelectList, "Vui lòng chọn", htmlAttributes: new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, "Tên nhà", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Sumary, "Mô tả ngắn", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Sumary, new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IDDuAn, "Thuộc dự án", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(q => q.IDDuAn, ViewBag.IDDuAns as SelectList, "Chọn dự án", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Views, "Số lượt xem", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Views, new { @class = "form-control", required = "true", type = "number" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.State, "Cho thuê/Bán", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <label>@Html.RadioButtonFor(q => q.State, "THUE") Cho thuê</label>
+                        <label>@Html.RadioButtonFor(q => q.State, "BAN") Bán</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IDMap, "Vị trí GG Map", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.IDMap, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BedRoom, "Số phòng ngủ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.BedRoom, new { @class = "form-control", required = "true", type = "number" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Area, "Diện tích", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Area, new { @class = "form-control", required = "true", type = "number" })
+                            <span class="input-group-addon" id="basic-addon1">m2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, "Giá bán/cho thuê", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+
+                <hr />
+                <div class="form-group">
+                    @Html.Label("Địa chỉ nhà", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Xã</span>
+                                @Html.DropDownList("IDAddress3", ViewBag.xAddress3s as SelectList, "Vui lòng chọn", htmlAttributes: new { @class = "form-control", required = "true" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Huyện</span>
+                                @Html.DropDownList("IDAddress2", ViewBag.xAddress2s as SelectList, "Vui lòng chọn", htmlAttributes: new { @class = "form-control", required = "true" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">Tỉnh</span>
+                                @Html.DropDownList("IDAddress1", ViewBag.xAddress1s as SelectList, "Vui lòng chọn", htmlAttributes: new { @class = "form-control", required = "true" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                @Html.Action("InfoHouse", new { id = Model.IDHouse })
+                <hr />
+                <h2>Hình ảnh</h2>
+                <p>Upload ảnh mới: <input type="file" name="Image" value="" multiple /></p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <td>Hình ảnh</td>
+                            <td>Mô tả ngắn</td>
+                            <td>Thứ tự</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.ImageHouses.Count; i++)
+                        {
+                            var ImageHouses = Model.ImageHouses.ToList();
+                            @Html.HiddenFor(q => ImageHouses[i].Link)
+                            @Html.HiddenFor(q => ImageHouses[i].IDImageHouse)
+                            @Html.HiddenFor(q => ImageHouses[i].IDHouse)
+                            <tr>
+                                <td><img src="@ImageHouses[i].Link" alt="@ImageHouses[i].Link" style="max-height: 100px" /></td>
+                                <td>
+                                    @Html.TextBoxFor(q => ImageHouses[i].Name)
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(q => ImageHouses[i].Rank)
+                                </td>
+                                <td>
+                                    <span class="btn btn-warning"><i class=" fa fa-trash-o" k></i> Xóa</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn green" />
+                        <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> QUAY LẠI DANH SÁCH</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

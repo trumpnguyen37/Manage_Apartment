@@ -1,0 +1,160 @@
+﻿@model WebsiteMVC.Models.House
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout02.cshtml";
+}
+
+
+<style>
+    .info-sketch {
+        height: auto;
+        min-height: 190px;
+    }
+
+    @@media screen and (max-width: 480px) {
+        .info-sketch {
+            padding-top: 20px;
+        }
+
+        .floorplan-property .content {
+            padding-bottom: 0;
+        }
+    }
+</style>
+<section class="content-detail-house">
+    <div class="width1140">
+        <header class="detail-house">
+            <div class="address">
+                <span>@Model.Code</span> &#8226;
+                <h2><a href="@Url.Action("Search","House",new { state = Model.State, input = Model.xAddress3.Name })" title="@Model.xAddress3.Type">@Model.xAddress3.Name ,</a></h2>
+                <h2><a href="@Url.Action("Search","House",new { state = Model.State, input = Model.xAddress2.Name })" title="@Model.xAddress2.Type">@Model.xAddress2.Name ,</a></h2>
+                <h2><a href="@Url.Action("Search","House",new { state = Model.State, input = Model.xAddress1.Name })" title="@Model.xAddress1.Type">@Model.xAddress1.Name</a></h2>
+            </div>
+            <h1>@Model.Name</h1>
+            <ul class="detailroom">
+                <li title="Phòng ngủ"><span class="font-icon bedroom"></span> @Model.BedRoom</li>
+                <li title="Diện tích"><span class="font-icon area"></span> @Model.Area m²</li>
+                <li title="Giá">
+                    <strong>$</strong> @Model.Price tr/tháng
+                </li>
+            </ul>
+        </header>
+        <div class="right-content">
+            <div class="agent-detail-house">
+                <div class="contact-agency-info">
+                    <div class="avataragency cover">
+                        <img src="@Model.TaiKhoan.Avatar" alt="@Model.TaiKhoan.FullName" title="@Model.TaiKhoan.FullName">
+                    </div>
+                    <div class="infoagency">
+                        <h3>@Model.TaiKhoan.FullName</h3>
+                        <p>@Model.TaiKhoan.POSITION</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="cta-bottom-wrapper">
+    <div class="cta-bottom-inner">
+        <div class="phone">
+            <a class="cta-hotline" href="tel:@Model.TaiKhoan.Phone">
+                <span class="font-icon fone-b font-20"></span> <strong>@Model.TaiKhoan.Phone</strong>
+            </a>
+        </div>
+        <div>
+            <a class="cta-form contact-now" href="#contact-now">YÊU CẦU THÔNG TIN</a>
+        </div>
+    </div>
+</div>
+<section class="bg-white mgb-0">
+    <section class="width1140">
+        <div class="left-content">
+            <div class="heading-02">Tổng quan</div>
+            <div class="content collapsed pdb-0" data-height="150">
+                <p class="summary">@Model.Sumary</p>
+            </div>
+
+            @Html.Action("InfoHouse", "House", new { id = Model.IDHouse })
+            @Html.Action("ImageHouse", "House", new { id = Model.IDHouse })
+
+            @if (Model.DuAn != null)
+            {
+                <div class="heading-02">Thông tin dự án</div>
+                <div class="pdt-15">
+                    <div class="khudancu-left">
+                        <a href="@Url.Action("Detail","DuAn",new { IDDuAn = Model.DuAn.IDDuAn})" title="@Model.DuAn.Name">
+                            <div class="khudancu-img">
+                                <img class="image-pixelated" src="@(Model.DuAn.ImageDuAns.FirstOrDefault()?.Link)" alt="@Model.DuAn.Name"
+                                     title="@Model.DuAn.Name">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="khudancu-right">
+                        <a href="@Url.Action("Detail","DuAn",new { IDDuAn = Model.DuAn.IDDuAn})" title="@Model.DuAn.Name">
+                            <p class="title">@Model.DuAn.Name</p>
+                        </a>
+                        <p class="summary pdt-0" data-height="150">@Model.DuAn.Sumary</p>
+                        <ul>
+                            <li class="btn-chitiet"><a href="@Url.Action("Detail","DuAn",new { IDDuAn = Model.DuAn.IDDuAn})">Xem chi tiết</a></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="right-content">
+            <div id="agent-fix">
+                <div class="booking-tour">
+                    <div class="contact-agency">
+                        <div class="proprety-form-contact" id="contact-now-fixed-form"></div>
+                        <a href="tel:@Model.TaiKhoan.Phone" class="btn-hotline-red">
+                            <span class="font-icon fone-b font-20"> </span>
+                            <strong>@Model.TaiKhoan.Phone</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<div id="contact-now-form" class="mdialog">
+    <div class="body">
+        <div class="form-signup">
+            <div class="title">
+                Liên hệ chuyên viên Rever
+                <a href="#" class="actionIcon close" title="Đóng"></a>
+            </div>
+            <form name="contact-dialog">
+                <div class="box-form proprety-form-contact" id="contact-now-form-body"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="mdialog" id="sell-now-form" style="background: none">
+    <div class="popup-overlay">
+        <div class="title title-res">
+            <span>
+                <a class="back-icon cnb-close" href="javascript:void(0)"></a>
+            </span>
+            <span class="house-type">Bán, cho thuê nhà với Rever</span>
+        </div>
+        <div class="popup-contact">
+            <div class="bg-e1e2e6 header">
+                Bán, cho thuê nhà với Rever
+            </div>
+            <div class="actionIcon cnb-close"></div>
+            <div class="form-contact contact-form">
+                <div class="contact" id="sell-now-form-body"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.IDDuAn.HasValue)
+{
+    @Html.Action("More", "House", new { IDHouse = Model.IDHouse, IsCungDuAn = true })
+}
+
+@Html.Action("More", "House", new { IDHouse = Model.IDHouse, IsCungDuAn = false })

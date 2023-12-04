@@ -1,0 +1,44 @@
+﻿@model List<WebsiteMVC.Models.InfoHouse>
+
+@{
+    var gr = Model.GroupBy(q => q.Key.IDCategory).OrderBy(q => q.First().Key.Category.Rank).ThenBy(q => q.First().Key.Rank);
+}
+
+@for (int i = 0; i < gr.Count(); i++)
+{
+    var InfoHouse = gr.ElementAt(i).ToList();
+    <h2>@InfoHouse.First().Key.Category.Name</h2>
+    for (int j = 0; j < InfoHouse.Count(); j++)
+    {
+        var ob = InfoHouse.ElementAt(j);
+        <div class="form-group">
+            @Html.Hidden($"InfoHouse[{i * gr.Count() + j}].IDInfoHouse",InfoHouse[j].IDInfoHouse)
+            @Html.Hidden($"InfoHouse[{i * gr.Count() + j}].IDHouse",InfoHouse[j].IDHouse)
+            @Html.Hidden($"InfoHouse[{i * gr.Count() + j}].IDKey",InfoHouse[j].IDKey)
+            @if (ob.Key.Type == "check")
+            {
+                @Html.Label(" ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <label>
+                        @if (ob.Value == "true")
+                        {
+                            @Html.TextBox($"InfoHouse[{i * gr.Count() + j}].Value", "true", new { @class = "form-control", type = "checkbox", @Value = "true", @checked = "true" })
+                        }
+                        else
+                        {
+                            @Html.TextBox($"InfoHouse[{i * gr.Count() + j}].Value", "true", new { @class = "form-control", type = "checkbox", @Value = "true" })
+                        }
+                        @ob.Key.Name
+                    </label>
+                </div>
+            }
+            else
+            {
+                @Html.Label(ob.Key.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextArea($"InfoHouse[{i * gr.Count() + j}].Value", ob.Value, new { @class = "form-control", Rows = "2" })
+                </div>
+            }
+        </div>
+    }
+}

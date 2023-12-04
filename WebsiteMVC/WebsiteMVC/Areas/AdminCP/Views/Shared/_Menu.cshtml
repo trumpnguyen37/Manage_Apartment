@@ -1,0 +1,84 @@
+﻿<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+    <li class="sidebar-toggler-wrapper">
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <div class="sidebar-toggler">
+        </div>
+        <!-- END SIDEBAR TOGGLER BUTTON -->
+    </li>
+    <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+    @*<li class="sidebar-search-wrapper">
+            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+            <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+            <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+            <form class="sidebar-search " action="extra_search.html" method="POST">
+                <a href="javascript:;" class="remove">
+                    <i class="icon-close"></i>
+                </a>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+                    </span>
+                </div>
+            </form>
+            <!-- END RESPONSIVE QUICK SEARCH FORM -->
+        </li>*@
+    <li>
+        <a href="@Url.Action("Index","ThongKe")">
+            <i class="icon-home"></i>
+            <span class="title">THỐNG KÊ</span>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("Index","House")">
+            <i class="icon-home"></i>
+            <span class="title">NHÀ ĐẤT</span>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("Index","DuAn")">
+            <i class="icon-home"></i>
+            <span class="title">DỰ ÁN</span>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("Index","TinTuc")">
+            <i class="icon-home"></i>
+            <span class="title">TIN TỨC</span>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action("Index","Investor")">
+            <i class="icon-home"></i>
+            <span class="title">NHÀ ĐẦU TƯ</span>
+        </a>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <i class="icon-home"></i>
+            <span class="title">DANH MỤC</span>
+            <span class="arrow "></span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="@Url.Action("Index","Key")">
+                    <i class="icon-bulb"></i>
+                    KEY
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index","Category")">
+                    <i class="icon-bulb"></i>
+                    CATEGORY
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index","Address")">
+                    <i class="icon-bulb"></i>
+                    ĐỊA CHỈ
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>

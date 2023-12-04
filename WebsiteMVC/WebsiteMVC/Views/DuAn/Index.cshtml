@@ -1,0 +1,102 @@
+﻿@model IEnumerable<WebsiteMVC.Models.DuAn>
+
+@{
+    ViewBag.Title = "DuAn";
+    Layout = "~/Views/Shared/_Layout02.cshtml";
+}
+
+<div class="mainbody">
+    <section class="bg-white">
+        <div class="width1140 main-content">
+            <h1>Tìm hiểu các dự án bất động sản mới nhất</h1>
+            <p class="mota-duan">
+                Rever lựa chọn cho bạn các dự án bất động sản chất lượng và mới nhất đang trong
+                quá trình mở bán ở TPHCM. Bạn có thể xem thông tin từng dự án và liên hệ ngay với T-House để được
+                tư vấn chi tiết.
+            </p>
+            <div class="more-button-box">
+                <a class="black-button" href="#contact-team" title="Liên hệ với chuyên viên">
+                    Liên hệ với chuyên
+                    viên
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="background-gray listpro-content">
+        @foreach (var item in Model)
+        {
+            <div class="allproject-list">
+                <a href="@Url.Action("Detail","DuAn",new { IDDuAn = item.IDDuAn})" title="@item.Name">
+                    <div class="thumb-duan">
+                        <img src="@item.xImage.Link" title="@item.Name" alt="@item.Name">
+                    </div>
+                </a>
+                <div class="info-duan">
+                    <div class="adress">
+                        <h4><a href="#" title="@item.xAddress2.Name">@item.xAddress2.Name</a></h4> •
+                        <h4><a href="#" title="@item.xAddress1.Name">@item.xAddress1.Name</a></h4>
+                    </div>
+                    <h2><a href="@Url.Action("Detail","DuAn",new { IDDuAn = item.IDDuAn})" title="@item.Name">@item.Name</a></h2>
+
+                    <ul>
+                        <li class="info-icon">
+                            <span class="font-icon apartment-icon font-20"></span> @item.Block block
+                        </li>
+                        <li class="info-icon">
+                            <span class="font-icon unitsbuilding-icon font-20"></span> @item.Floor căn
+                        </li>
+                    </ul>
+                    <p class="content">@item.Sumary</p>
+                    <p class="btn-more">
+                        <a href="@Url.Action("Detail","DuAn",new { IDDuAn = item.IDDuAn})">Xem thêm</a>
+                    </p>
+                </div>
+            </div>
+        }
+    </section>
+    <ul class="search-pagination-button-list">
+        <li><a class="rightmenu-linkblack" href="/du-an?" data-page=""><span class="font-icon back-page2"></span></a></li>
+        <li><a class="rightmenu-linkblack disabled-button" href="/du-an?" data-page="1">1</a></li>
+        <li><a class="rightmenu-linkblack " href="/du-an?page=2" data-page="2">2</a></li>
+        <li><a class="rightmenu-linkblack " href="/du-an?page=3" data-page="3">3</a></li>
+        <li><a class="rightmenu-linkblack " href="/du-an?page=4" data-page="4">4</a></li>
+        <li><a class="rightmenu-linkblack " href="/du-an?page=5" data-page="5">5</a></li>
+        <li><a class="rightmenu-linkblack" href="/du-an?page=26" data-page="26"><span class="font-icon next-page2"></span></a></li>
+    </ul>
+
+
+    <div class="mdialog" id="contact-now-form" style="background: none">
+        <div class="popup-overlay">
+            <div class="title title-res">
+                <span>
+                    <a class="back-icon cnb-close" href="javascript:void(0)"></a>
+                </span>
+                <span class="house-type">Liên hệ với chuyên viên</span>
+            </div>
+            <div class="popup-contact">
+                <div class="bg-e1e2e6 header">
+                    Liên hệ với chuyên viên
+                </div>
+                <div class="actionIcon cnb-close"></div>
+                <div class="form-contact contact-form">
+                    <div class="contact" id="contact-now-form-project-new">
+                        <script>
+                            createHSForm({
+                                css: '',
+                                target: '#contact-now-form-project-new',
+                                portalId: '2775524',
+                                formId: 'aabd6ffc-5ece-4b6b-bf89-6a0983d1369f',
+                                onFormReady: function ($form) {
+                                    window['$hs_form'] = $form;
+                                    $form.on("submit", function (e) {
+                                        goog_report_conversion ? goog_report_conversion() : null;
+                                    });
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

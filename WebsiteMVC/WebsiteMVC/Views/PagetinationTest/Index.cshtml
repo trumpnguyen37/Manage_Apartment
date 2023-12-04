@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout02.cshtml";
+}
+
+@{
+    var page = Convert.ToInt32(ViewData["page"]);
+}
+<div id="list">
+    @Html.Partial("List")
+</div>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@Html.Partial("_History4MVC")
+<script type="text/javascript">
+    function navigateTo(page) {
+        $.ajax({
+            url : "@Url.Action("List")",
+            data : {
+                page : page
+            },
+            success : function(data) {
+                $("#list").html(data);
+                pushState({
+                    url : "/" + page,
+                    page : page
+                });
+            }
+        });
+    }
+
+    function backTo(page) {
+        $.ajax({
+            url : "@Url.Action("List")",
+            data : {
+                page : page
+            },
+            success : function(data) {
+                $("#list").html(data);
+            }
+        });
+    }
+
+    replaceState({
+        url : "/" + @page,
+        page : @page
+    });
+
+    setPopstate(function(state) {
+        backTo(state.page);
+    });
+</script>
+

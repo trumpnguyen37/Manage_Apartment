@@ -1,0 +1,123 @@
+﻿@model WebsiteMVC.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "TÀI KHOẢN";
+    Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-pencil"></i> @ViewBag.Title</div>
+    <div class="panel-body">
+
+        @using (Html.BeginForm("Edit", "TaiKhoan", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.IDTaiKhoan)
+                @Html.HiddenFor(model => model.State)
+                @Html.HiddenFor(model => model.Avatar)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FullName, "Họ tên (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Username, "Tên đăng nhập (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+
+                @if (Model.IDTaiKhoan == 0)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, "Mật khẩu (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", required = "true" })
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @Html.HiddenFor(q => q.Password);
+                }
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Avatar, "Ảnh đại diện", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <img src="@Model.Avatar" alt="<chưa có ảnh>" />
+                        <br />
+                        <input type="file" name="Avatar" value="" />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Birthday, "Ngày sinh (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Birthday, new { required = "true", type = "date", Value = Model.Birthday?.ToString("yyyy-MM-dd") })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Adress, "Địa chỉ (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Adress, new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Phone, "Điện thoại (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", required = "true" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, "Email (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "true", type = "email" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.POSITION, "Chức vụ (*)", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <select required class="form-control" name="POSITION" id="POSITION">
+                            <option value="">Vui lòng chọn</option>
+                            <option value="ADMIN">Admin</option>
+                            <option value="QUANLY">Quản lý</option>
+                            <option value="CHUYENVIEN">Chuyên viên</option>
+                            <option value="USER">User</option>
+                        </select>
+
+                        <script>
+                            $("#POSITION").val('@Model.POSITION');
+                        </script>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, "Thông tin thêm", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Description, new { @class = "form-control", Rows = "20" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Lưu" class="btn green" />
+                        <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-circle-o-left"></i> QUAY LẠI DANH SÁCH</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

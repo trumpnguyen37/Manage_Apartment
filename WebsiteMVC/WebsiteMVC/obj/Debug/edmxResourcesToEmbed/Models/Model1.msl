@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HOUSEModelStoreContainer" CdmEntityContainer="HOUSEEntities">
+    <EntitySetMapping Name="Addresses">
+      <EntityTypeMapping TypeName="HOUSEModel.Address">
+        <MappingFragment StoreEntitySet="Address">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IDAddress" ColumnName="IDAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddressDuAns">
+      <EntityTypeMapping TypeName="HOUSEModel.AddressDuAn">
+        <MappingFragment StoreEntitySet="AddressDuAn">
+          <ScalarProperty Name="IDAddress" ColumnName="IDAddress" />
+          <ScalarProperty Name="IDDuAn" ColumnName="IDDuAn" />
+          <ScalarProperty Name="IDAddressDuAn" ColumnName="IDAddressDuAn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddressHouses">
+      <EntityTypeMapping TypeName="HOUSEModel.AddressHouse">
+        <MappingFragment StoreEntitySet="AddressHouse">
+          <ScalarProperty Name="IDAddress" ColumnName="IDAddress" />
+          <ScalarProperty Name="IDHouse" ColumnName="IDHouse" />
+          <ScalarProperty Name="IDAdressHouse" ColumnName="IDAdressHouse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="HOUSEModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DuAns">
+      <EntityTypeMapping TypeName="HOUSEModel.DuAn">
+        <MappingFragment StoreEntitySet="DuAn">
+          <ScalarProperty Name="GiaThue" ColumnName="GiaThue" />
+          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+          <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+          <ScalarProperty Name="Start" ColumnName="Start" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="IDMap" ColumnName="IDMap" />
+          <ScalarProperty Name="IDInvestor" ColumnName="IDInvestor" />
+          <ScalarProperty Name="Sumary" ColumnName="Sumary" />
+          <ScalarProperty Name="House" ColumnName="House" />
+          <ScalarProperty Name="Floor" ColumnName="Floor" />
+          <ScalarProperty Name="Block" ColumnName="Block" />
+          <ScalarProperty Name="IDDuAn" ColumnName="IDDuAn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Houses">
+      <EntityTypeMapping TypeName="HOUSEModel.House">
+        <MappingFragment StoreEntitySet="House">
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="BedRoom" ColumnName="BedRoom" />
+          <ScalarProperty Name="IDMap" ColumnName="IDMap" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Views" ColumnName="Views" />
+          <ScalarProperty Name="IDDuAn" ColumnName="IDDuAn" />
+          <ScalarProperty Name="Sumary" ColumnName="Sumary" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="IDHouse" ColumnName="IDHouse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageDuAns">
+      <EntityTypeMapping TypeName="HOUSEModel.ImageDuAn">
+        <MappingFragment StoreEntitySet="ImageDuAn">
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="IDDuAn" ColumnName="IDDuAn" />
+          <ScalarProperty Name="IDImageDuAn" ColumnName="IDImageDuAn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImageHouses">
+      <EntityTypeMapping TypeName="HOUSEModel.ImageHouse">
+        <MappingFragment StoreEntitySet="ImageHouse">
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+          <ScalarProperty Name="IDHouse" ColumnName="IDHouse" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IDImageHouse" ColumnName="IDImageHouse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoDuAns">
+      <EntityTypeMapping TypeName="HOUSEModel.InfoDuAn">
+        <MappingFragment StoreEntitySet="InfoDuAn">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="IDKey" ColumnName="IDKey" />
+          <ScalarProperty Name="IDDuAn" ColumnName="IDDuAn" />
+          <ScalarProperty Name="IDInfoDuAn" ColumnName="IDInfoDuAn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InfoHouses">
+      <EntityTypeMapping TypeName="HOUSEModel.InfoHouse">
+        <MappingFragment StoreEntitySet="InfoHouse">
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="IDKey" ColumnName="IDKey" />
+          <ScalarProperty Name="IDHouse" ColumnName="IDHouse" />
+          <ScalarProperty Name="IDInfoHouse" ColumnName="IDInfoHouse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Investors">
+      <EntityTypeMapping TypeName="HOUSEModel.Investor">
+        <MappingFragment StoreEntitySet="Investor">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Sumary" ColumnName="Sumary" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IDInvestor" ColumnName="IDInvestor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Keys">
+      <EntityTypeMapping TypeName="HOUSEModel.Key">
+        <MappingFragment StoreEntitySet="Key">
+          <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Required" ColumnName="Required" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IDKey" ColumnName="IDKey" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="HOUSEModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaiKhoans">
+      <EntityTypeMapping TypeName="HOUSEModel.TaiKhoan">
+        <MappingFragment StoreEntitySet="TaiKhoan">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="POSITION" ColumnName="POSITION" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TinTucs">
+      <EntityTypeMapping TypeName="HOUSEModel.TinTuc">
+        <MappingFragment StoreEntitySet="TinTuc">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="Contents" ColumnName="Contents" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IDTinTuc" ColumnName="IDTinTuc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

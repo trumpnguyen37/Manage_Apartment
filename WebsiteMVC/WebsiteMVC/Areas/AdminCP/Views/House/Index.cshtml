@@ -1,0 +1,182 @@
+﻿@model IEnumerable<WebsiteMVC.Models.House>
+
+@{
+    ViewBag.Title = "DANH SÁCH ";
+    Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
+    var accept = WebsiteMVC.Models.LoginHelper.CheckRole(WebsiteMVC.Models.eRole.ADMIN);
+}
+
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-edit"></i>@ViewBag.Title
+        </div>
+    </div>
+    <div class="portlet-body">
+        @if (accept)
+        {
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a href="@Url.Action("Edit")" id="sample_editable_1_new" class="btn green">
+                                Thêm <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+        <table class="table table-bordered" id="table">
+            <thead>
+                <tr>
+                    <th>
+                        MÃ
+                    </th>
+                    <th>
+                        TÊN
+                    </th>
+                    <th>
+                        THÔNG TIN
+                    </th>
+                    <th>
+                        NV PHỤ TRÁCH
+                    </th>
+                    <th>SỐ LƯỢT XEM</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <p>Phòng ngủ: @item.BedRoom</p>
+                            <p>Diện tích: @item.Area</p>
+                            <p>Giá: @item.Price tỷ</p>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TaiKhoan.FullName)
+                        </td>
+                        <td>@item.Views</td>
+                        <td>
+                            <button type="button" class="btn btn-info" onclick="modal('@item.IDHouse','@item.State')">
+                                @switch (item.State)
+                                {
+                                    case 2:
+                                        <b>Tạm ngưng</b>
+                                        break;
+                                    case 4:
+                                        <b>Hủy</b>
+                                        break;
+                                    default:
+                                        <b>Rao bán/Cho thuê</b>
+                                        break;
+                                }
+                            </button>
+                            @if (accept)
+                            {
+                                <a href="@Url.Action("Edit",new { id = item.IDHouse})" class="btn btn-primary" title="Sửa"><i class="fa fa-pencil"></i></a>
+                                <span onclick="delete_object(this,'@item.IDHouse')" class="btn btn-warning" title="Xóa"><i class="fa fa-trash-o"></i></span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+@section css{
+    <link href="/Content/theme/assets/global/plugins/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+@section js{
+    <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+
+    <script>
+        $("#table").DataTable();
+
+        function delete_object(target, id) {
+            if (confirm("Bạn có muốn xóa không?")) {
+                $.ajax({
+                    url: "@Url.Action("Delete")",
+                    type: "POST",
+                    data: { id: id },
+                    success: function (d) {
+                        if (d) {
+                            $(target).closest("tr").remove();
+                        } else {
+                            alert("Xóa thất bại");
+                        }
+                    }
+                })
+            }
+        }
+    </script>
+}
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">THAY ĐỔI TRẠNG THÁI</h4>
+            </div>
+            <div class="modal-body">
+                <p> Trạng thái nhà đất mà bạn muốn thay đổi:</p>
+                <input type="hidden" name="IDHouse" value="0" />
+                <ul style="list-style-type: none">
+                    <li><label><input type="radio" checked name="MState" value="@((byte)WebsiteMVC.MState.ACTIVE)" /> Rao bán/Cho thuê</label></li>
+                    <li><label><input type="radio" name="MState" value="@((byte)WebsiteMVC.MState.DISACTIVE)" /> Tạm ngưng</label></li>
+                    <li><label><input type="radio" name="MState" value="@((byte)WebsiteMVC.MState.ORTHER)" /> Hủy</label></li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="saveState()">Lưu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function modal(IDHouse, MState) {
+            $('[name="IDHouse"]').val(IDHouse);
+            $(`[name="MState"][value="${MState}"]`).click();
+        debugger
+            $('#myModal').modal("show");
+        }
+
+        function saveState() {
+            let data = {
+                IDHouse: $('[name="IDHouse"]').val(),
+                newState: $('[name="MState"]:checked').val()
+            };
+            console.log(data);
+            $.ajax({
+                url: '@Url.Action("State")',
+                type: 'POST',
+                data: data
+            }).success(data => {
+                if (data) window.location.reload();
+            });
+        }
+</script>

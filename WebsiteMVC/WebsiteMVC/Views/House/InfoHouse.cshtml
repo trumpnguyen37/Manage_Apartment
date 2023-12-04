@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WebsiteMVC.Models.InfoHouse>
+
+@{
+    var gr_list = Model.Where(q => q.Key.Category.State.Contains("list")).GroupBy(q => q.Key.IDCategory).OrderBy(q => q.First().Key.Category.Rank);
+    var gr_adv = Model.Where(q => q.Key.Category.State.Contains("adv")).GroupBy(q => q.Key.IDCategory).OrderBy(q => q.First().Key.Category.Rank);
+}
+
+@foreach (var item in gr_list)
+{
+    <div class="heading-02">@item.First().Key.Category.Name </div>
+    <div class="content collapsed">
+        <ul class="detail-more">
+            @foreach (var ob in item.OrderBy(q => q.Key.Rank))
+            {
+                <li>
+                    <p class="left">@ob.Key.Name</p>
+                    @switch (ob.Key.Type)
+                    {
+                        case "check":
+                            <p class="right font-icon @(ob.Value == "true"?"check":"none")"></p>
+                            break;
+                        default:
+                            <p class="right">@ob.Value</p>
+                            break;
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+    @*<p class="more">
+            <a href="#" title="Xem thêm / thu gọn" class="collapse" is-more="false" more="Xem thêm"
+               less="Thu gọn">Xem thêm</a>
+        </p>*@
+}
+
+@foreach (var item in gr_adv)
+{
+    <div class="heading-02">@item.First().Key.Category.Name</div>
+    <div class="content">
+        @foreach (var ob in item.OrderBy(q => q.Key.Rank))
+        {
+            <div class="list-advantage clear">
+                <div class="advantage-name">
+                    <p>@ob.Key.Name</p>
+                </div>
+                <div class="advandate-content">@ob.Value</div>
+            </div>
+        }
+    </div>
+}

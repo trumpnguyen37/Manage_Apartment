@@ -1,0 +1,31 @@
+﻿@model IEnumerable<WebsiteMVC.Models.DuAn>
+
+<section class=" width1140">
+    <div class="common-info">
+        <h2>Dự án nổi bật</h2>
+        <p> T-House mang đến cho bạn đầy đủ thông tin các dự án bất động sản nổi bật nhất hiện nay</p>
+    </div>
+    <section class="exclusive main-content">
+        @foreach (var item in Model)
+        {
+            <article class="featured kdc-new">
+                <a href="@Url.Action("Detail","DuAn",new { IDDuAn = item.IDDuAn})" title="@item.Name">
+                    <div class="cover">
+                        <img class="image-pixelated" src="@item.xImage.Link"
+                             title="@item.Name"
+                             draggable="false">
+                    </div>
+                    <header class="overlay">
+                        <h3 class="heading">@item.Name</h3>
+                        <p>
+                            <h4>@(item.xAddress1?.Name)</h4>,
+                            <h4>@(item.xAddress2?.Name)</h4>,
+                        </p>
+                        <h4>@(item.Start?.ToString("dd/MM/yyyy"))</h4>
+                    </header>
+                </a>
+            </article>
+        }
+        <div class="more-button-box"><a class="black-button" href="#">Xem tất cả</a></div>
+    </section>
+</section>

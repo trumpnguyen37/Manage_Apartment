@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WebsiteMVC.Models.ImageHouse>
+
+<div class="heading-02">Hình ảnh</div>
+<div class="gallery-property collapsed" data-height="900">
+    @foreach (var item in Model.OrderBy(q => q.Rank))
+    {
+        <div class="cover">
+            <a href="#" title="@item.Name">
+                <img src="@item.Link" alt="@item.Name" title="@item.Name">
+                <span>@item.Name</span>
+            </a>
+        </div>
+    }
+    <div class="last-div"></div>
+</div>
+@*<p class="view-more-gray more">
+        <a href="#" title="Xem thêm / thu gọn" style="text-underline: none" class="collapse pdt-0" is-more="false"
+           more="Xem thêm"
+           less="Thu gọn">Xem tất cả</a>
+    </p>*@

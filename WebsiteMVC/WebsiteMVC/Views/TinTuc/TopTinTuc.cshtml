@@ -1,0 +1,55 @@
+﻿@model  IEnumerable<WebsiteMVC.Models.TinTuc>
+
+<section class="bg-white">
+    <div class="news-box">
+        <div class="common-info">
+            <h2>Thông tin thị trường</h2>
+            <p>Góc nhìn thị trường, thông tin dự án và kiến thức giao dịch cần biết</p>
+        </div>
+        <section class="news-content main-content">
+            <div class="bordertop-news01">
+                <article class="featured">
+                    @if (Model.Count() > 0)
+                    {
+                        <a href="@Url.Action("Index","TinTuc",new { id = Model.ElementAt(0).IDTinTuc })">
+                            <div class="cover">
+                                <img class="image-normalized" src="@(Model.ElementAt(0).Avatar)"
+                                     alt="@(Model.ElementAt(0).Title)">
+                            </div>
+                        </a>
+                        <header>
+                            <div class="news">
+                                <a href="@Url.Action("Detail","TinTuc",new { id = Model.ElementAt(0).IDTinTuc })">@(Model.ElementAt(0).Title)</a>
+                            </div>
+                            <p class="by">@(Model.ElementAt(0).CreateTime?.ToString("dd/MM/yyyy"))</p>
+                            <p class="description"></p>
+                        </header>
+                    }
+                </article>
+            </div>
+            <div class="bordertop-news02">
+                @for (int i = 1; i < Model.Count(); i++)
+                {
+                    <article class="featured">
+                        <a href="@Url.Action("Index","TinTuc",new { id = Model.ElementAt(i).IDTinTuc })">
+                            <div class="cover">
+                                <img class="image-normalized" src="@(Model.ElementAt(i).Avatar)"
+                                     alt="@(Model.ElementAt(i).Title)">
+                            </div>
+                        </a>
+                        <header>
+                            <div class="news">
+                                <a href="@Url.Action("Detail","TinTuc",new { id = Model.ElementAt(i).IDTinTuc })">@(Model.ElementAt(i).Title)</a>
+                            </div>
+                            <p class="by">@(Model.ElementAt(i).CreateTime?.ToString("dd/MM/yyyy"))</p>
+                        </header>
+                    </article>
+                }
+
+            </div>
+            <div class="more-button-box mgt-0">
+                <a class="black-button" href="#">Xem tất cả</a>
+            </div>
+        </section>
+    </div>
+</section>

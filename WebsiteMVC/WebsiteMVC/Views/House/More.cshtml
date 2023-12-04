@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebsiteMVC.Models.House>
+
+@if (Model.Count() > 0)
+{
+    <section class="background-gray">
+        <div class="width1140">
+            <div class="heading-02 pd-tb-30 mgt-10">Nhà đất lân cận</div>
+            <div id="similar-property" class="flexslider main-content">
+                <div class="slider-buttons">
+                    <a href="#" title="next"><span class="but-nextdetail-news flex-next"></span> </a>
+                    <a href="#" title="prev">
+                        <span class="but-predetail-news flex-prev flex-disabled"
+                              tabindex="-1"></span>
+                    </a>
+                </div>
+                <ul class="exclusive slides">
+                    @foreach (var item in Model)
+                    {
+                        <li class="featured">
+                            <a href="@Url.Action("Detail","House",new { IDHouse = item.IDHouse})" title="@item.Name">
+                                <div class="cover">
+                                    <img class="image-pixelated" src="@item.xImage.Link" alt="@item.Name" title="@item.Name" />
+                                </div>
+                            </a>
+                            <header>
+                                <a href="@Url.Action("Detail","House",new { IDHouse = item.IDHouse})" title="@item.Name"><h3 class="heading">@item.Name</h3></a>
+                                <h4>@item.Code &#8226; </h4>
+                                <h4><a href="@Url.Action("Search","House",new { state = item.State , input = item.xAddress1.Name })">@item.xAddress1.Name,</a></h4>
+                                <h4><a href="@Url.Action("Search","House",new { state = item.State , input = item.xAddress2.Name })">@item.xAddress2.Name</a></h4>
+                                <ul>
+                                    <li title="Phòng ngủ">
+                                        <span class="font-icon bedroom"></span> @item.BedRoom
+                                    </li>
+                                    <li title="Diện tích"><span class="font-icon area"></span> @item.Area m²</li>
+                                </ul>
+                                <div class="price">@item.Price</div>
+                            </header>
+
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+
+}

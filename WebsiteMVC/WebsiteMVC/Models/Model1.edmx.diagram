@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="620f25019467437a9133b85b895c12bd" Name="Diagram1">
+        <EntityTypeShape EntityType="HOUSEModel.Address" Width="1.5" PointX="6" PointY="15.375" />
+        <EntityTypeShape EntityType="HOUSEModel.AddressDuAn" Width="1.5" PointX="8.25" PointY="10.625" />
+        <EntityTypeShape EntityType="HOUSEModel.AddressHouse" Width="1.5" PointX="13.5" PointY="7.625" />
+        <EntityTypeShape EntityType="HOUSEModel.Category" Width="1.5" PointX="3.75" PointY="2.5" />
+        <EntityTypeShape EntityType="HOUSEModel.DuAn" Width="1.5" PointX="6" PointY="9.25" />
+        <EntityTypeShape EntityType="HOUSEModel.House" Width="1.5" PointX="11.25" PointY="9.125" />
+        <EntityTypeShape EntityType="HOUSEModel.ImageDuAn" Width="1.5" PointX="8.25" PointY="21.875" />
+        <EntityTypeShape EntityType="HOUSEModel.ImageHouse" Width="1.5" PointX="13.5" PointY="13.375" />
+        <EntityTypeShape EntityType="HOUSEModel.InfoDuAn" Width="1.5" PointX="8.25" PointY="7.5" />
+        <EntityTypeShape EntityType="HOUSEModel.InfoHouse" Width="1.5" PointX="13.5" PointY="10.5" />
+        <EntityTypeShape EntityType="HOUSEModel.Investor" Width="1.5" PointX="3.75" PointY="6.5" />
+        <EntityTypeShape EntityType="HOUSEModel.Key" Width="1.5" PointX="6" PointY="2.125" />
+        <EntityTypeShape EntityType="HOUSEModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HOUSEModel.TaiKhoan" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="HOUSEModel.TinTuc" Width="1.5" PointX="3" PointY="10.25" />
+        <AssociationConnector Association="HOUSEModel.FK_AddressDuAn_Address" />
+        <AssociationConnector Association="HOUSEModel.FK_AddressHouse_Address" />
+        <AssociationConnector Association="HOUSEModel.FK_AddressDuAn_DuAn" />
+        <AssociationConnector Association="HOUSEModel.FK_AddressHouse_House" />
+        <AssociationConnector Association="HOUSEModel.FK_Key_Category" />
+        <AssociationConnector Association="HOUSEModel.FK_DuAn_Investor" />
+        <AssociationConnector Association="HOUSEModel.FK_DuAn_TaiKhoan" />
+        <AssociationConnector Association="HOUSEModel.FK_House_DuAn" />
+        <AssociationConnector Association="HOUSEModel.FK_ImageDuAn_DuAn" />
+        <AssociationConnector Association="HOUSEModel.FK_InfoDuAn_DuAn" />
+        <AssociationConnector Association="HOUSEModel.FK_House_TaiKhoan" />
+        <AssociationConnector Association="HOUSEModel.FK_ImageHouse_House" />
+        <AssociationConnector Association="HOUSEModel.FK_InfoHouse_House" />
+        <AssociationConnector Association="HOUSEModel.FK_InfoDuAn_Key" />
+        <AssociationConnector Association="HOUSEModel.FK_InfoHouse_Key" />
+        <AssociationConnector Association="HOUSEModel.FK_TinTuc_TaiKhoan" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

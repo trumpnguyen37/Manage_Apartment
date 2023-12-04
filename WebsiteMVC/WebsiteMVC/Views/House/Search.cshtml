@@ -1,0 +1,124 @@
+﻿@model IEnumerable<WebsiteMVC.Models.House>
+
+@{
+    Layout = "~/Views/Shared/_Layout02.cshtml";
+}
+
+<div id="list">
+    <div class="width1140">
+        <div id="search-container" class="map-and-sidebar width-1600">
+            <div id="div-search-side-bar" class="search-sidebars" style="background-color: white; width: 100%">
+                <div id="search-result-container" class="search-sidebar_content list-view" style="top: 0">
+                    <div class="title-sum">
+                        <div class="search-sum-no">
+                            <h1 id="keyword-result" class="search-keyword" title="@ViewBag.Title">@ViewBag.Title</h1>
+                            <span id="total-result" class="total-result">@(Model.Count() > 0 ? Model.Count().ToString("#,###") : "0") căn</span>
+                            &nbsp;<a id="btn-clear-filter" class="hide" href="#"><i class="zmdi zmdi-close"></i></a>
+                        </div>
+                        <div class="left-list-filter list-sort">
+                            <ul>
+                                <li class="list-filter">
+                                    <a id="filter-button-sort" href="#" title="Sắp xếp theo">
+                                        <span id="filter-sort-current">Gần nhất</span>
+                                        <span class="arrow-icon-down icon-sort-cyan font-icon"></span>
+                                    </a>
+                                    <ul id="filter-popup-sort" class="popup sort-view">
+                                        <li class="checkbox"><a name="filter-sort" data-value="4" class="active">Gần nhất</a></li>
+                                        <li class="checkbox"><a name="filter-sort" data-value="1">Giá tăng dần</a></li>
+                                        <li class="checkbox"><a name="filter-sort" data-value="2">Giá giảm dần</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <section id="search-result" class="result">
+                        @foreach (var item in Model)
+                        {
+                            <article class="featured hover-item">
+                                <a href="@Url.Action("Detail","House",new { IDHouse = item.IDHouse})" target="_blank" class="property_detail" title="@item.Name">
+                                    <div class="cover">
+                                        <img src="@item.xImage.Link" alt="@item.Name" title="@item.Name">
+                                        <div class="free-month">Miễn phí 1 tháng</div>
+                                        <div class="monopoly">Độc quyền</div>
+                                    </div>
+                                </a>
+                                <header>
+                                    <a href="@Url.Action("Detail","House",new { IDHouse = item.IDHouse})" target="_blank">
+                                        <h3 class="heading" data-id="1488171187220_3090">
+                                            <span class="overflow-text">@item.Name</span>
+                                        </h3>
+                                    </a>
+                                    <div class="id-ad">
+                                        <h4>@item.Code • </h4>
+
+                                        <h4><a href="#">@item.xAddress3.Name, </a></h4>
+                                        <h4><a href="#">@item.xAddress2.Name, </a></h4>
+                                        <h4><a href="#">@item.xAddress1.Name </a></h4>
+                                    </div>
+                                    <ul>
+                                        <li title="Phòng ngủ"><i class="zmdi zmdi-airline-seat-individual-suite"></i> @item.BedRoom</li>
+                                        <li title="Diện tích"><i class="zmdi zmdi-photo-size-select-small"></i> @item.Area m²</li>
+                                    </ul>
+                                    <div class="info-bs-price">
+                                        <div class="price-list"> @item.Price</div>
+                                    </div>
+                                    <div class="agent-content">
+                                        <div class="info-agent-ct contact-agent" style="cursor:pointer">
+                                            <div class="avatar-agent-ct">
+                                                <img src="@item.TaiKhoan.Avatar" />
+                                            </div>
+                                            <div class="name-title">
+                                                <a>@item.TaiKhoan.FullName</a>
+                                                <a>@item.TaiKhoan.POSITION</a>
+                                            </div>
+                                        </div>
+                                        <div class="action-list">
+                                            <a href="#" class="contactnow-but contact-agent">
+                                                <i class="font-icon fone space-icon"></i>@item.TaiKhoan.Phone
+                                            </a>
+                                        </div>
+                                    </div>
+                                </header>
+                            </article>
+                        }
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @Html.Partial("Pagination")
+</div>
+
+@Html.Partial("_History4MVC")
+
+<script type="text/javascript">
+    function navigateTo(page) {
+        $.ajax({
+            url : "@Url.Action("ListPage")",
+            data : {
+                page : page
+            },
+            success : function(data) {
+                $("#list").html(data);
+            }
+        });
+    }
+
+    function backTo(page) {
+        $.ajax({
+            url : "@Url.Action("ListPage")",
+            data : {
+                page : page
+            },
+            success : function(data) {
+                $("#list").html(data);
+            }
+        });
+    }
+
+    setPopstate(function(state) {
+        backTo(state.page);
+    });
+</script>

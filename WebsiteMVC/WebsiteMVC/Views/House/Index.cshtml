@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "TRANG CHỦ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="responsive-search hide">
+    <div class="responsive-search-header">
+        <div class="back-mobile-icon">
+            <a href="#"><i class="zmdi zmdi-hc-2x zmdi-arrow-left"></i></a>
+        </div>
+        <ul class="tab-bt">
+            <li><a id="responsive-suggest-sale" class="active" href="#">Mua nhà</a></li>
+            <li><a id="responsive-suggest-rent" href="#">Thuê nhà</a></li>
+        </ul>
+    </div>
+    <div class="input-search-res">
+        <p><i class="font-icon searchicon space-icon"></i></p>
+        <input id="input-search-responsive" type="text" class="" placeholder="" autocomplete="off">
+        <a href="#" class="hide"><i class="zmdi zmdi-close"></i></a>
+    </div>
+    <div class="search-result-res">
+        <ul class="suggest-result">
+            <li>
+                <ul id="suggest-result-responsive"></ul>
+            </li>
+            <li id="history-responsive" class="hide">
+                <h4> Lịch sử tìm kiếm</h4>
+                <ul class="listing"></ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="header2402">
+    <div class="black-background"></div>
+    <nav class="header2402-navBar">
+        <ul>
+            <li><a href="/">Trang chủ</a></li>
+            <li>
+                <a href="tel:0974 131 292"> <i class="font-icon fone space-icon"></i><span>0974 131 292</span></a>
+            </li>
+            <li><a href="@Url.Action("Search","Home" )">Nhà đất</a></li>
+            <li><a href="@Url.Action("Index","DuAn")">Dự án</a></li>
+            <li><a href="@Url.Action("GT","House")">Giới thiệu</a></li>
+            <li class="diadiem"><a href="#register" title="Đăng ký">Đăng ký</a></li>
+                <li><a href="#login" title="Đăng nhập">Đăng nhập</a></li>
+        </ul>
+        <a href="#" class="actionIcon"></a>
+
+        <div class="actionIcon"></div>
+    </nav>
+    <div class="width-1600">
+        <hgroup>
+            <a href="/">
+                <img style="width:44px" src="~/Content/img/T2.png" alt="rever" />
+            </a>
+        </hgroup>
+        <a href="#" class="menuicon"></a>
+        <div class="right-menu">
+            <ul>
+                <li>
+                    <a class="header1506-link rightmenu-link" href="tel:0974 131 292">
+                        <i class="font-icon fone space-icon"></i>
+                        <span>0974 131 292</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="header1506-link rightmenu-link" href="@Url.Action("Search","House" )">Nhà đất</a>
+                </li>
+                <li><a class="header1506-link rightmenu-link" href="@Url.Action("Index","DuAn")">Dự án</a></li>
+                <li><a class="header1506-link rightmenu-link" href="@Url.Action("GT","House")">Giới thiệu</a></li>
+                <li class="border-navgroup"><a class="header1506-link rightmenu-link" href="#register" title="Đăng ký">Đăng ký</a></li>
+                    <li><a class="header1506-link rightmenu-link" href="#login" title="Đăng nhập">Đăng nhập</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="mainbody">
+    <div class="topsearch-bg image-pixelated">
+        <div class="topsearch-bgloop">
+            <div class="box-search">
+                <div class="fix-width770">
+                    <h1>Tìm kiếm ngôi nhà bạn yêu thích</h1>
+                    <p>Mua, Bán, Thuê hơn hàng nghìn ngôi nhà, căn hộ, biệt thự, đất nền và phòng tại Việt Nam</p>
+                    <form id="suggest-form" action="@Url.Action("Search","House")" method="post">
+                        <div class="but-search-home">
+                            <select name="state" style="width: 100%; height: 100%; text-align: center; outline: none; border: none; padding-left: 30px">
+                                <option value="BAN" style="text-align: center">Mua nhà</option>
+                                <option value="THUE">Thue nhà</option>
+                            </select>
+                        </div>
+                        <div class="search-home ui-widget">
+                            <div class="btn-on-off-filter">
+                                <a href="#"></a>
+                            </div>
+                            <i class="font-icon searchicon icon-s-h"></i>
+                            <input id="input-search" name="keyword" value="" placeholder="Nhập địa điểm khu dân cư, tòa nhà ...">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+            ];
+            $("#input-search").autocomplete({
+                source: availableTags
+            });
+        });
+    </script>
+
+    @Html.Action("TopDuAn", "DuAn")
+    @*@Html.Action("TopHouse", new { IsBan = true })
+    @Html.Action("TopHouse", new { IsBan = false })*@
+
+    <section class="background-gray app-mobile">
+        <div class="width1140">
+            <div class="col-ms-6 center">
+                <picture>
+                    <img class="width-70-ber" src="~/Content/img/mobile_app_rever.jpg" />
+                </picture>
+            </div>
+            <div class="smarter-from">
+                <div class="title-30">Thị trường bất động sản ngay trong tầm tay</div>
+                <div class="pd-tb-30">
+                    Cài đặt ứng dụng T-House để tìm kiếm nhanh chóng nhà đất bán và cho thuê phù hợp, xem thông tin
+                    mới nhất các dự án nổi bật, theo dõi xu hướng thị trường bất động sản.
+                </div>
+                <div class="pdb-10"><strong>TẢI ỨNG DỤNG VÀ TRẢI NGHIỆM NGAY</strong></div>
+                <div>
+                    <p>
+                        <a class="rever-app-ios" href="#">
+                            <img class="big-size" src="~/Content/img/rever_app_store.svg"
+                                 alt="rever app store">
+                        </a>
+                        <a class="rever-app-ios" href="#">
+                            <img class="big-size" src="~/Content/img/rever_app_android.svg"
+                                 alt="rever google store">
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @Html.Action("TopTinTuc", "TinTuc")
+
+</div>

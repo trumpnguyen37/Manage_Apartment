@@ -1,0 +1,125 @@
+﻿@model IEnumerable<WebsiteMVC.Models.TaiKhoan>
+
+@{
+    ViewBag.Title = "DANH SÁCH TÀI KHOẢN";
+    Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
+    var accept = WebsiteMVC.Models.LoginHelper.CheckRole(WebsiteMVC.Models.eRole.ADMIN);
+}
+
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-edit"></i>@ViewBag.Title
+        </div>
+    </div>
+    <div class="portlet-body">
+        @if (accept)
+        {
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <a href="@Url.Action("Edit")" id="sample_editable_1_new" class="btn green">
+                                Thêm <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <table class="table table-bordered" id="table">
+            <thead>
+                <tr>
+                    <th>
+                        HỌ TÊN
+                    </th>
+                    <th>
+                        ẢNH
+                    </th>
+                    <th>
+                        TÊN ĐĂNG NHẬP
+                    </th>
+                    <th>
+                        SDT
+                    </th>
+                    <th>
+                        EMAIL
+                    </th>
+                    <th>
+                        CHỨC VỤ
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td>
+                            <img src="@item.Avatar" style="max-height: 30px" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.POSITION)
+                        </td>
+                        <td>
+                            @if (accept)
+                            {
+                                <a href="@Url.Action("Edit",new { id = item.IDTaiKhoan})" class="btn btn-primary" title="Sửa"><i class="fa fa-pencil"></i></a>
+                                <span onclick="delete_object(this,'@item.IDTaiKhoan')" class="btn btn-warning" title="Xóa"><i class="fa fa-trash-o"></i></span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+@if (accept)
+{
+
+    @section css{
+        <link href="/Content/theme/assets/global/plugins/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" />
+    }
+
+    @section js{
+        <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="/Content/theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+
+        <script>
+        $("#table").DataTable();
+
+        function delete_object(target, id) {
+            if (confirm("Bạn có muốn xóa không?")) {
+                $.ajax({
+                    url: "@Url.Action("Delete")",
+                    type: "POST",
+                    data: { id: id },
+                    success: function (d) {
+                        if (d) {
+                            $(target).closest("tr").remove();
+                        } else {
+                            alert("Xóa thất bại");
+                        }
+                    }
+                })
+            }
+        }
+        </script>
+    }
+
+}

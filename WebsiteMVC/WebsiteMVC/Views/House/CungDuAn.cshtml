@@ -1,0 +1,42 @@
+﻿@model IEnumerable<WebsiteMVC.Models.House>
+
+@if (Model.Count() > 0)
+{
+    <section class="background-gray">
+        <section class="width1140 main-content">
+            <div class="heading-02 mgt-10">Nhà đất cùng dự án</div>
+            <section class="compare-house">
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <div class="article">
+                        <div class="abc">@(i + 1)</div>
+                        <div class="img">
+                            <a class="cover" href="@Url.Action("Detail","House",new { IDHouse = Model.ElementAt(i).IDHouse})" title="@Model.ElementAt(i).Name">
+                                <img src="@Model.ElementAt(i).xImage.Link" alt="@Model.ElementAt(i).Name" title="@Model.ElementAt(i).Name">
+                            </a>
+                        </div>
+                        <div class="title">
+                            <h3><a href="@Model.ElementAt(i).Name" title="@Model.ElementAt(i).Name">@Model.ElementAt(i).Name</a></h3>
+
+                        </div>
+                        <div class="status rever-color"></div>
+                        <div class="info">
+                            <ul>
+                                <li title="Phòng ngủ">
+                                    <span class="font-icon bedroom"></span> @Model.ElementAt(i).BedRoom
+                                </li>
+                                <li class="marea" title="Diện tích">
+                                    <span class="font-icon area"></span> @Model.ElementAt(i).Area m²
+                                </li>
+                                <li title="Giá">@Model.ElementAt(i).Price</li>
+                            </ul>
+                        </div>
+                        <input name="url" type="hidden" value="/can-ho-vinhomes-central-park-3-phong-ngu-tang-cao-p3-view-song-4">
+                        <input name="lat" type="hidden" value="10.7934741">
+                        <input name="lon" type="hidden" value="106.71827009999993">
+                    </div>
+                }
+            </section>
+        </section>
+    </section>
+}

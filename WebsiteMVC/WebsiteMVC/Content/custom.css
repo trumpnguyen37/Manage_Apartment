@@ -1,0 +1,19 @@
+﻿img {
+    max-height: 70px;
+}
+
+active {
+    display: inline-block;
+    font-family: FontAwesome;
+    color: green;
+    cursor: pointer;
+}
+
+    active:before {
+        content: '\f058';
+    }
+
+.False:before {
+    content: '\f056';
+    color: dimgrey;
+}

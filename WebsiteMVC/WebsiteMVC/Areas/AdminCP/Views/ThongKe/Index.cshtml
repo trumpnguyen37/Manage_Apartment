@@ -1,0 +1,155 @@
+﻿@model IEnumerable<WebsiteMVC.Models.House>
+
+@{
+    ViewBag.Title = "THỐNG KÊ ĐĂNG BÀI";
+    Layout = "~/Areas/AdminCP/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-md-4">
+    <div class="input-group">
+        <span class="input-group-addon">Từ ngày</span>
+        <input type="date" name="stimeStart" value="@ViewBag.fromDate" class="form-control" />
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="input-group">
+        <span class="input-group-addon">Đến ngày</span>
+        <input type="date" name="stimeEnd" value="@ViewBag.toDate" class="form-control" />
+    </div>
+</div>
+<button class="btn" onclick="load()">Xem</button>
+<hr />
+
+<!-- Styles -->
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+        font-size: 11px;
+    }
+</style>
+
+<!-- Resources -->
+<script src="~/amcharts/amcharts.js"></script>
+<script src="~/amcharts/serial.js"></script>
+<script src="~/amcharts/plugins/export/export.min.js"></script>
+<link href="~/amcharts/plugins/export/export.css" rel="stylesheet" />
+<script src="~/amcharts/themes/light.js"></script>
+
+<!-- Chart code -->
+<script>
+    var chartData = [];
+    var chart = {};
+
+    function load() {
+        let data = {
+            sfromDate: $('[name="stimeStart"]').val(),
+            stoDate: $('[name="stimeEnd"]').val(),
+        };
+
+        if (new Date(data.sfromDate) > new Date(data.stoDate)) {
+            alert("Vui lòng chọn ngày hợp lệ");
+            return false;
+        }
+
+        $.ajax({
+            url: '@Url.Action("GetData")',
+            data: data,
+            type: 'POST',
+            success: function (d) {
+            chartData = [];
+
+            $('[name="stimeStart"]').val(d.fromDate);
+            $('[name="stimeEnd"]').val(d.toDate);
+            d.data.forEach(function (obj) {
+                chartData.push({
+                    date: new Date(parseInt(obj.Time.replace("/Date(", "").replace(")/", ""), 10)),
+                    visits: obj.SoBai
+                });
+            });
+            console.table(d.data)
+            $('#tbody').html('');
+            d.data.forEach(function (obj) {
+                let time = new Date(parseInt(obj.Time.replace("/Date(", "").replace(")/", ""), 10));
+                $('#tbody').append(`
+<tr>
+            <td>Tháng ${(time.getMonth() + 1)}/${time.getFullYear()}</td>
+            <td>${Number(obj.SoDuAn).toLocaleString()}</td>
+            <td>${obj.SoBai.toLocaleString()}</td>
+            <td><a href='${decodeURI(obj.LinkDetalt)}'>Chi tiết</a></td>
+        </tr>`);
+            })
+
+            chart = AmCharts.makeChart("chartdiv", {
+                "theme": "light",
+                "type": "serial",
+                "marginRight": 80,
+                "autoMarginOffset": 20,
+                "marginTop": 20,
+                "dataProvider": chartData,
+                "valueAxes": [{
+                    "id": "v1",
+                    "axisAlpha": 0.1
+                }],
+                "graphs": [{
+                    "useNegativeColorIfDown": true,
+                    "balloonText": "[[category]]<br><b>value: [[value]]</b>",
+                    "bullet": "round",
+                    "bulletBorderAlpha": 1,
+                    "bulletBorderColor": "#FFFFFF",
+                    "hideBulletsCount": 50,
+                    "lineThickness": 2,
+                    "lineColor": "#fdd400",
+                    "negativeLineColor": "#67b7dc",
+                    "valueField": "visits"
+                }],
+                "chartScrollbar": {
+                    "scrollbarHeight": 5,
+                    "backgroundAlpha": 0.1,
+                    "backgroundColor": "#868686",
+                    "selectedBackgroundColor": "#67b7dc",
+                    "selectedBackgroundAlpha": 1
+                },
+                "chartCursor": {
+                    "valueLineEnabled": true,
+                    "valueLineBalloonEnabled": true
+                },
+                "categoryField": "date",
+                "categoryAxis": {
+                    "parseDates": true,
+                    "axisAlpha": 0,
+                    "minHorizontalGap": 60
+                },
+                "export": {
+                    "enabled": true
+                }
+            });
+            chart.addListener("dataUpdated", zoomChart);
+        }
+    });
+    }
+
+    function zoomChart() {
+        if (chart.zoomToIndexes) {
+            chart.zoomToIndexes(0, chartData.length - 1);
+        }
+    }
+
+    load();
+</script>
+
+<!-- HTML -->
+<div id="chartdiv"></div>
+
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <td>NGÀY TẠO</td>
+            <td>SỐ DỰ ÁN</td>
+            <td>SỐ BÀI NHÀ ĐẤT</td>
+            <td>CHUYÊN VIÊN</td>
+        </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+</table>

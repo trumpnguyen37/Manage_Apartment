@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HOUSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HOUSEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Addresses" EntityType="HOUSEModel.Address" />
+    <EntitySet Name="AddressDuAns" EntityType="HOUSEModel.AddressDuAn" />
+    <EntitySet Name="AddressHouses" EntityType="HOUSEModel.AddressHouse" />
+    <EntitySet Name="Categories" EntityType="HOUSEModel.Category" />
+    <EntitySet Name="DuAns" EntityType="HOUSEModel.DuAn" />
+    <EntitySet Name="Houses" EntityType="HOUSEModel.House" />
+    <EntitySet Name="ImageDuAns" EntityType="HOUSEModel.ImageDuAn" />
+    <EntitySet Name="ImageHouses" EntityType="HOUSEModel.ImageHouse" />
+    <EntitySet Name="InfoDuAns" EntityType="HOUSEModel.InfoDuAn" />
+    <EntitySet Name="InfoHouses" EntityType="HOUSEModel.InfoHouse" />
+    <EntitySet Name="Investors" EntityType="HOUSEModel.Investor" />
+    <EntitySet Name="Keys" EntityType="HOUSEModel.Key" />
+    <EntitySet Name="sysdiagrams" EntityType="HOUSEModel.sysdiagram" />
+    <EntitySet Name="TaiKhoans" EntityType="HOUSEModel.TaiKhoan" />
+    <EntitySet Name="TinTucs" EntityType="HOUSEModel.TinTuc" />
+    <AssociationSet Name="FK_AddressDuAn_Address" Association="HOUSEModel.FK_AddressDuAn_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="AddressDuAn" EntitySet="AddressDuAns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddressHouse_Address" Association="HOUSEModel.FK_AddressHouse_Address">
+      <End Role="Address" EntitySet="Addresses" />
+      <End Role="AddressHouse" EntitySet="AddressHouses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddressDuAn_DuAn" Association="HOUSEModel.FK_AddressDuAn_DuAn">
+      <End Role="DuAn" EntitySet="DuAns" />
+      <End Role="AddressDuAn" EntitySet="AddressDuAns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddressHouse_House" Association="HOUSEModel.FK_AddressHouse_House">
+      <End Role="House" EntitySet="Houses" />
+      <End Role="AddressHouse" EntitySet="AddressHouses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Key_Category" Association="HOUSEModel.FK_Key_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Key" EntitySet="Keys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DuAn_Investor" Association="HOUSEModel.FK_DuAn_Investor">
+      <End Role="Investor" EntitySet="Investors" />
+      <End Role="DuAn" EntitySet="DuAns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DuAn_TaiKhoan" Association="HOUSEModel.FK_DuAn_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="DuAn" EntitySet="DuAns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_House_DuAn" Association="HOUSEModel.FK_House_DuAn">
+      <End Role="DuAn" EntitySet="DuAns" />
+      <End Role="House" EntitySet="Houses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ImageDuAn_DuAn" Association="HOUSEModel.FK_ImageDuAn_DuAn">
+      <End Role="DuAn" EntitySet="DuAns" />
+      <End Role="ImageDuAn" EntitySet="ImageDuAns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InfoDuAn_DuAn" Association="HOUSEModel.FK_InfoDuAn_DuAn">
+      <End Role="DuAn" EntitySet="DuAns" />
+      <End Role="InfoDuAn" EntitySet="InfoDuAns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_House_TaiKhoan" Association="HOUSEModel.FK_House_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="House" EntitySet="Houses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ImageHouse_House" Association="HOUSEModel.FK_ImageHouse_House">
+      <End Role="House" EntitySet="Houses" />
+      <End Role="ImageHouse" EntitySet="ImageHouses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InfoHouse_House" Association="HOUSEModel.FK_InfoHouse_House">
+      <End Role="House" EntitySet="Houses" />
+      <End Role="InfoHouse" EntitySet="InfoHouses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InfoDuAn_Key" Association="HOUSEModel.FK_InfoDuAn_Key">
+      <End Role="Key" EntitySet="Keys" />
+      <End Role="InfoDuAn" EntitySet="InfoDuAns" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InfoHouse_Key" Association="HOUSEModel.FK_InfoHouse_Key">
+      <End Role="Key" EntitySet="Keys" />
+      <End Role="InfoHouse" EntitySet="InfoHouses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TinTuc_TaiKhoan" Association="HOUSEModel.FK_TinTuc_TaiKhoan">
+      <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+      <End Role="TinTuc" EntitySet="TinTucs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="IDAddress" />
+    </Key>
+    <Property Name="IDAddress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rank" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="AddressDuAns" Relationship="HOUSEModel.FK_AddressDuAn_Address" FromRole="Address" ToRole="AddressDuAn" />
+    <NavigationProperty Name="AddressHouses" Relationship="HOUSEModel.FK_AddressHouse_Address" FromRole="Address" ToRole="AddressHouse" />
+  </EntityType>
+  <EntityType Name="AddressDuAn">
+    <Key>
+      <PropertyRef Name="IDAddressDuAn" />
+    </Key>
+    <Property Name="IDAddressDuAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDDuAn" Type="Int32" />
+    <Property Name="IDAddress" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="HOUSEModel.FK_AddressDuAn_Address" FromRole="AddressDuAn" ToRole="Address" />
+    <NavigationProperty Name="DuAn" Relationship="HOUSEModel.FK_AddressDuAn_DuAn" FromRole="AddressDuAn" ToRole="DuAn" />
+  </EntityType>
+  <EntityType Name="AddressHouse">
+    <Key>
+      <PropertyRef Name="IDAdressHouse" />
+    </Key>
+    <Property Name="IDAdressHouse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDHouse" Type="Int32" />
+    <Property Name="IDAddress" Type="Int32" />
+    <NavigationProperty Name="Address" Relationship="HOUSEModel.FK_AddressHouse_Address" FromRole="AddressHouse" ToRole="Address" />
+    <NavigationProperty Name="House" Relationship="HOUSEModel.FK_AddressHouse_House" FromRole="AddressHouse" ToRole="House" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="IDCategory" />
+    </Key>
+    <Property Name="IDCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rank" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Keys" Relationship="HOUSEModel.FK_Key_Category" FromRole="Category" ToRole="Key" />
+  </EntityType>
+  <EntityType Name="DuAn">
+    <Key>
+      <PropertyRef Name="IDDuAn" />
+    </Key>
+    <Property Name="IDDuAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Block" Type="Int32" />
+    <Property Name="Floor" Type="Int32" />
+    <Property Name="House" Type="Int32" />
+    <Property Name="Sumary" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="IDInvestor" Type="Int32" />
+    <Property Name="IDMap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Byte" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Start" Type="DateTime" Precision="0" />
+    <Property Name="IDTaiKhoan" Type="Int32" />
+    <Property Name="GiaBan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GiaThue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AddressDuAns" Relationship="HOUSEModel.FK_AddressDuAn_DuAn" FromRole="DuAn" ToRole="AddressDuAn" />
+    <NavigationProperty Name="Investor" Relationship="HOUSEModel.FK_DuAn_Investor" FromRole="DuAn" ToRole="Investor" />
+    <NavigationProperty Name="TaiKhoan" Relationship="HOUSEModel.FK_DuAn_TaiKhoan" FromRole="DuAn" ToRole="TaiKhoan" />
+    <NavigationProperty Name="Houses" Relationship="HOUSEModel.FK_House_DuAn" FromRole="DuAn" ToRole="House" />
+    <NavigationProperty Name="ImageDuAns" Relationship="HOUSEModel.FK_ImageDuAn_DuAn" FromRole="DuAn" ToRole="ImageDuAn" />
+    <NavigationProperty Name="InfoDuAns" Relationship="HOUSEModel.FK_InfoDuAn_DuAn" FromRole="DuAn" ToRole="InfoDuAn" />
+  </EntityType>
+  <EntityType Name="House">
+    <Key>
+      <PropertyRef Name="IDHouse" />
+    </Key>
+    <Property Name="IDHouse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDTaiKhoan" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Sumary" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+    <Property Name="IDDuAn" Type="Int32" />
+    <Property Name="Views" Type="Int32" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDMap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BedRoom" Type="Int32" />
+    <Property Name="Area" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="State" Type="Byte" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <NavigationProperty Name="AddressHouses" Relationship="HOUSEModel.FK_AddressHouse_House" FromRole="House" ToRole="AddressHouse" />
+    <NavigationProperty Name="DuAn" Relationship="HOUSEModel.FK_House_DuAn" FromRole="House" ToRole="DuAn" />
+    <NavigationProperty Name="TaiKhoan" Relationship="HOUSEModel.FK_House_TaiKhoan" FromRole="House" ToRole="TaiKhoan" />
+    <NavigationProperty Name="ImageHouses" Relationship="HOUSEModel.FK_ImageHouse_House" FromRole="House" ToRole="ImageHouse" />
+    <NavigationProperty Name="InfoHouses" Relationship="HOUSEModel.FK_InfoHouse_House" FromRole="House" ToRole="InfoHouse" />
+  </EntityType>
+  <EntityType Name="ImageDuAn">
+    <Key>
+      <PropertyRef Name="IDImageDuAn" />
+    </Key>
+    <Property Name="IDImageDuAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDDuAn" Type="Int32" />
+    <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Rank" Type="Int32" />
+    <NavigationProperty Name="DuAn" Relationship="HOUSEModel.FK_ImageDuAn_DuAn" FromRole="ImageDuAn" ToRole="DuAn" />
+  </EntityType>
+  <EntityType Name="ImageHouse">
+    <Key>
+      <PropertyRef Name="IDImageHouse" />
+    </Key>
+    <Property Name="IDImageHouse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDHouse" Type="Int32" />
+    <Property Name="Link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Rank" Type="Int32" />
+    <NavigationProperty Name="House" Relationship="HOUSEModel.FK_ImageHouse_House" FromRole="ImageHouse" ToRole="House" />
+  </EntityType>
+  <EntityType Name="InfoDuAn">
+    <Key>
+      <PropertyRef Name="IDInfoDuAn" />
+    </Key>
+    <Property Name="IDInfoDuAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDDuAn" Type="Int32" />
+    <Property Name="IDKey" Type="Int32" />
+    <Property Name="Value" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DuAn" Relationship="HOUSEModel.FK_InfoDuAn_DuAn" FromRole="InfoDuAn" ToRole="DuAn" />
+    <NavigationProperty Name="Key" Relationship="HOUSEModel.FK_InfoDuAn_Key" FromRole="InfoDuAn" ToRole="Key" />
+  </EntityType>
+  <EntityType Name="InfoHouse">
+    <Key>
+      <PropertyRef Name="IDInfoHouse" />
+    </Key>
+    <Property Name="IDInfoHouse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDHouse" Type="Int32" />
+    <Property Name="IDKey" Type="Int32" />
+    <Property Name="Value" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="House" Relationship="HOUSEModel.FK_InfoHouse_House" FromRole="InfoHouse" ToRole="House" />
+    <NavigationProperty Name="Key" Relationship="HOUSEModel.FK_InfoHouse_Key" FromRole="InfoHouse" ToRole="Key" />
+  </EntityType>
+  <EntityType Name="Investor">
+    <Key>
+      <PropertyRef Name="IDInvestor" />
+    </Key>
+    <Property Name="IDInvestor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Sumary" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Byte" />
+    <NavigationProperty Name="DuAns" Relationship="HOUSEModel.FK_DuAn_Investor" FromRole="Investor" ToRole="DuAn" />
+  </EntityType>
+  <EntityType Name="Key">
+    <Key>
+      <PropertyRef Name="IDKey" />
+    </Key>
+    <Property Name="IDKey" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Rank" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Required" Type="Boolean" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDCategory" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="HOUSEModel.FK_Key_Category" FromRole="Key" ToRole="Category" />
+    <NavigationProperty Name="InfoDuAns" Relationship="HOUSEModel.FK_InfoDuAn_Key" FromRole="Key" ToRole="InfoDuAn" />
+    <NavigationProperty Name="InfoHouses" Relationship="HOUSEModel.FK_InfoHouse_Key" FromRole="Key" ToRole="InfoHouse" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TaiKhoan">
+    <Key>
+      <PropertyRef Name="IDTaiKhoan" />
+    </Key>
+    <Property Name="IDTaiKhoan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Avatar" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="DateTime" Precision="0" />
+    <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="POSITION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Byte" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DuAns" Relationship="HOUSEModel.FK_DuAn_TaiKhoan" FromRole="TaiKhoan" ToRole="DuAn" />
+    <NavigationProperty Name="Houses" Relationship="HOUSEModel.FK_House_TaiKhoan" FromRole="TaiKhoan" ToRole="House" />
+    <NavigationProperty Name="TinTucs" Relationship="HOUSEModel.FK_TinTuc_TaiKhoan" FromRole="TaiKhoan" ToRole="TinTuc" />
+  </EntityType>
+  <EntityType Name="TinTuc">
+    <Key>
+      <PropertyRef Name="IDTinTuc" />
+    </Key>
+    <Property Name="IDTinTuc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="CreateBy" Type="Int32" />
+    <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Avatar" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="Byte" />
+    <NavigationProperty Name="TaiKhoan" Relationship="HOUSEModel.FK_TinTuc_TaiKhoan" FromRole="TinTuc" ToRole="TaiKhoan" />
+  </EntityType>
+  <Association Name="FK_AddressDuAn_Address">
+    <End Type="HOUSEModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="HOUSEModel.AddressDuAn" Role="AddressDuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="IDAddress" />
+      </Principal>
+      <Dependent Role="AddressDuAn">
+        <PropertyRef Name="IDAddress" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddressHouse_Address">
+    <End Type="HOUSEModel.Address" Role="Address" Multiplicity="0..1" />
+    <End Type="HOUSEModel.AddressHouse" Role="AddressHouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="IDAddress" />
+      </Principal>
+      <Dependent Role="AddressHouse">
+        <PropertyRef Name="IDAddress" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddressDuAn_DuAn">
+    <End Type="HOUSEModel.DuAn" Role="DuAn" Multiplicity="0..1" />
+    <End Type="HOUSEModel.AddressDuAn" Role="AddressDuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="IDDuAn" />
+      </Principal>
+      <Dependent Role="AddressDuAn">
+        <PropertyRef Name="IDDuAn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddressHouse_House">
+    <End Type="HOUSEModel.House" Role="House" Multiplicity="0..1" />
+    <End Type="HOUSEModel.AddressHouse" Role="AddressHouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="House">
+        <PropertyRef Name="IDHouse" />
+      </Principal>
+      <Dependent Role="AddressHouse">
+        <PropertyRef Name="IDHouse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Key_Category">
+    <End Type="HOUSEModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="HOUSEModel.Key" Role="Key" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="IDCategory" />
+      </Principal>
+      <Dependent Role="Key">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DuAn_Investor">
+    <End Type="HOUSEModel.Investor" Role="Investor" Multiplicity="0..1" />
+    <End Type="HOUSEModel.DuAn" Role="DuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Investor">
+        <PropertyRef Name="IDInvestor" />
+      </Principal>
+      <Dependent Role="DuAn">
+        <PropertyRef Name="IDInvestor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DuAn_TaiKhoan">
+    <End Type="HOUSEModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
+    <End Type="HOUSEModel.DuAn" Role="DuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Principal>
+      <Dependent Role="DuAn">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_House_DuAn">
+    <End Type="HOUSEModel.DuAn" Role="DuAn" Multiplicity="0..1" />
+    <End Type="HOUSEModel.House" Role="House" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="IDDuAn" />
+      </Principal>
+      <Dependent Role="House">
+        <PropertyRef Name="IDDuAn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ImageDuAn_DuAn">
+    <End Type="HOUSEModel.DuAn" Role="DuAn" Multiplicity="0..1" />
+    <End Type="HOUSEModel.ImageDuAn" Role="ImageDuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="IDDuAn" />
+      </Principal>
+      <Dependent Role="ImageDuAn">
+        <PropertyRef Name="IDDuAn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InfoDuAn_DuAn">
+    <End Type="HOUSEModel.DuAn" Role="DuAn" Multiplicity="0..1" />
+    <End Type="HOUSEModel.InfoDuAn" Role="InfoDuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DuAn">
+        <PropertyRef Name="IDDuAn" />
+      </Principal>
+      <Dependent Role="InfoDuAn">
+        <PropertyRef Name="IDDuAn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_House_TaiKhoan">
+    <End Type="HOUSEModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
+    <End Type="HOUSEModel.House" Role="House" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Principal>
+      <Dependent Role="House">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ImageHouse_House">
+    <End Type="HOUSEModel.House" Role="House" Multiplicity="0..1" />
+    <End Type="HOUSEModel.ImageHouse" Role="ImageHouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="House">
+        <PropertyRef Name="IDHouse" />
+      </Principal>
+      <Dependent Role="ImageHouse">
+        <PropertyRef Name="IDHouse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InfoHouse_House">
+    <End Type="HOUSEModel.House" Role="House" Multiplicity="0..1" />
+    <End Type="HOUSEModel.InfoHouse" Role="InfoHouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="House">
+        <PropertyRef Name="IDHouse" />
+      </Principal>
+      <Dependent Role="InfoHouse">
+        <PropertyRef Name="IDHouse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InfoDuAn_Key">
+    <End Type="HOUSEModel.Key" Role="Key" Multiplicity="0..1" />
+    <End Type="HOUSEModel.InfoDuAn" Role="InfoDuAn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Key">
+        <PropertyRef Name="IDKey" />
+      </Principal>
+      <Dependent Role="InfoDuAn">
+        <PropertyRef Name="IDKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InfoHouse_Key">
+    <End Type="HOUSEModel.Key" Role="Key" Multiplicity="0..1" />
+    <End Type="HOUSEModel.InfoHouse" Role="InfoHouse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Key">
+        <PropertyRef Name="IDKey" />
+      </Principal>
+      <Dependent Role="InfoHouse">
+        <PropertyRef Name="IDKey" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TinTuc_TaiKhoan">
+    <End Type="HOUSEModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
+    <End Type="HOUSEModel.TinTuc" Role="TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="IDTaiKhoan" />
+      </Principal>
+      <Dependent Role="TinTuc">
+        <PropertyRef Name="CreateBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

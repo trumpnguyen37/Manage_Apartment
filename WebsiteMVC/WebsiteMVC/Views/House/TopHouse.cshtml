@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebsiteMVC.Models.House>
+
+<section class="@(ViewBag.IsBan == true ? "background-gray" : "bg-gray-e6")">
+    <div class="width1140">
+        <div class="common-info">
+            <h2>Nhà đất @(ViewBag.IsBan == true ? "bán" : "thuê") nổi bật</h2>
+            <p>
+                Rever đồng hành với bạn từ quá trình tìm kiếm cho đến khi giao dịch thành công ngôi nhà yêu
+                thích của bạn.
+            </p>
+        </div>
+        <section class="exclusive for-rent main-content">
+            @foreach (var item in Model)
+            {
+                <article class="featured">
+                    <a href="@Url.Action("Detail","House",new { IDHouse = item.IDHouse })">
+                        <div class="cover">
+                            <img src="@item.xImage.Link" title="@item.Name" />
+                        </div>
+                    </a>
+                    <header>
+                        <a href="@Url.Action("Detail","House",new { IDHouse = item.IDHouse })">
+                            <h3 class="heading">@item.Name</h3>
+                        </a>
+                        <h4>ABT29545 &#8226; </h4>
+                        <h4><a href="@Url.Action("Search","House",new { state = item.State, input = item.xAddress2.Name })">@item.xAddress2.Name,</a></h4>
+                        <h4><a href="@Url.Action("Search","House",new { state = item.State, input = item.xAddress1.Name })">@item.xAddress1.Name</a></h4>
+                        <ul>
+                            <li title="Phòng ngủ">
+                                <span class="font-icon bedroom"></span> @item.BedRoom
+                            </li>
+                            <li title="Diện tích">
+                                <span class="font-icon area"></span> @item.Area m²
+                            </li>
+                        </ul>
+                        <div class="price">@item.Price tr/tháng</div>
+                    </header>
+                </article>
+            }
+            <div class="more-button-box">
+                <a class="black-button" href="@Url.Action("Search","House")">
+                    Xem tất cả
+                </a>
+            </div>
+        </section>
+    </div>
+</section>

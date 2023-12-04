@@ -1,0 +1,393 @@
+﻿@model WebsiteMVC.Models.DuAn
+
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout02.cshtml";
+}
+<div id="wrap">
+    <div class="responsive-search hide">
+        <div class="responsive-search-header">
+            <div class="back-mobile-icon">
+                <a href="#"><i class="zmdi zmdi-hc-2x zmdi-arrow-left"></i></a>
+            </div>
+            <ul class="tab-bt">
+                <li><a id="responsive-suggest-sale" class="active" href="#">Mua nhà</a></li>
+                <li><a id="responsive-suggest-rent" href="#">Thuê nhà</a></li>
+            </ul>
+        </div>
+        <div class="input-search-res">
+            <p><i class="font-icon searchicon space-icon"></i></p>
+            <input id="input-search-responsive" type="text" class="" placeholder="" autocomplete="off">
+            <a href="#" class="hide"><i class="zmdi zmdi-close"></i></a>
+        </div>
+        <div class="search-result-res">
+            <ul class="suggest-result">
+                <li>
+                    <ul id="suggest-result-responsive"></ul>
+                </li>
+                <li id="history-responsive" class="hide">
+                    <h4> Lịch sử tìm kiếm</h4>
+                    <ul class="listing"></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="project-header">
+        <section class="project-header">
+            <div class="project-name width1140 padding-0-15" itemscope>
+                <div class="address">
+                    <h1 class="title-project">@Model.Name</h1>
+                    <h4 itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        <meta itemprop="position" content="1" />
+                        <a itemprop="item" href="#" title="@Model.xAddress1.Type">
+                            <meta itemprop="name" content="@Model.xAddress1.Type" />
+                            @Model.xAddress1.Name
+                        </a>
+                    </h4>
+                    <h4 itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        <meta itemprop="position" content="1" />
+                        <a itemprop="item" href="#" title="@Model.xAddress2.Type">
+                            <meta itemprop="name" content="@Model.xAddress2.Type" />
+                            › @Model.xAddress2.Name
+                        </a>
+                    </h4>
+                    <h4 itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        <meta itemprop="position" content="1" />
+                        <a itemprop="item" href="#" title="@Model.xAddress3.Type">
+                            <meta itemprop="name" content="@Model.xAddress3.Type" />
+                            › @Model.xAddress3.Name
+                        </a>
+                    </h4>
+                    <input type="hidden" name="alias" value="vinhomes-central-park-1">
+                </div>
+            </div>
+        </section>
+
+        <div class="imageContainer">
+            <div class="imageScroller">
+                <ul style="overflow-y: hidden">
+                    @foreach (var item in Model.ImageDuAns.OrderBy(q => q.Rank).Take(3))
+                    {
+                        <li style="width: 33%">
+                            <a class="cover" href="#" data-target="view-photo"
+                               title="@Model.Name">
+                                <img class="heroImage" src="@item.Link" style="width: 100% "
+                                     alt="@Model.Name">
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="cx-fixedWidthPage">
+                <div class="sum-picture">
+                    <div>
+                        <button class="btn-cyan" data-target="view-all-photo">
+                            <i class="zmdi zmdi-collection-folder-image"></i>
+                            <span>
+                                @Model.ImageDuAns.Count() ảnh
+                            </span>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="btn-cyan" data-target="view-map">
+                            <i class="zmdi zmdi-map"></i> <span>Vị trí</span>
+                        </button>
+                        <input name="lat" type="hidden" value="10.7934741">
+                        <input name="lon" type="hidden" value="106.71827009999993">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tong-quan" class="stickyTrigger-shadow">
+            <div class="width1140 padding-0-15">
+                <ul class="info-sticky-header">
+                    <li>
+                        <p><a class="active" href="#tong-quan">Tổng quan</a></p>
+                    </li>
+                    <li>
+                        <p><a href="#vi-tri">Vị trí</a></p>
+                    </li>
+                    <li>
+                        <p><a href="#du-an-tuong-tu">Dự án lân cận</a></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <section class="project-sumary width1140 padding-0-15">
+            <div class="project-name">
+                <div class="listing-detail">
+                    <div class="listing-item">
+                        <div class="item-left">Trạng thái:</div>
+                        <div class="item-right">@Model.State</div>
+                    </div>
+                    <div class="listing-item">
+                        <div class="item-left">Chủ đầu tư:</div>
+                        <div class="item-right">@(Model.Investor?.Name)</div>
+                    </div>
+                    <div class="listing-item">
+                        <div class="item-left">Loại hình:</div>
+                        <div class="item-right">
+                            <span class="color slash"> Căn hộ</span>
+                        </div>
+                    </div>
+                    <div class="listing-item">
+                        <div class="item-left">Số block:</div>
+                        <div class="item-right">@Model.Block</div>
+                    </div>
+                    <div class="listing-item">
+                        <div class="item-left">Số tầng:</div>
+                        <div class="item-right">@Model.Floor</div>
+                    </div>
+                    <div class="listing-item">
+                        <div class="item-left">Khởi công:</div>
+                        <div class="item-right">@(Model.Start?.ToString("dd/MM/yyyy"))</div>
+                    </div>
+                </div>
+
+                <div class="listing-detail-price">
+                    @if (string.IsNullOrWhiteSpace(Model.GiaBan) == false)
+                    {
+                        <span>Giá bán: </span> <span class="price-redRV">
+                            @Model.GiaBan
+                        </span><br />
+                    }
+                    @if (string.IsNullOrWhiteSpace(Model.GiaThue) == false)
+                    {
+                        <span>Giá thuê: </span> <span class="price-redRV">
+                            @Model.GiaThue
+                        </span>
+                    }
+                </div>
+            </div>
+        </section>
+        <div class="cta-bottom-wrapper">
+            <div class="cta-bottom-inner">
+                <div class="phone">
+                    <a class="cta-hotline" href="tel:@Model.TaiKhoan.Phone">
+                        <span class="font-icon fone-b font-20"></span> <strong>@Model.TaiKhoan.Phone</strong>
+                    </a>
+                </div>
+                <div>
+                    <a data-target="contact-agent" class="cta-form" href="#">YÊU CẦU THÔNG TIN</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="sticky-header">
+        <div class="stickyTrigger">
+            <div class="width1140 padding-0-15">
+                <ul class="info-sticky-header">
+                    <li>
+                        <p><a class="active" href="#tong-quan">Tổng quan</a></p>
+                    </li>
+                    <li>
+                        <p><a href="#vi-tri">Vị trí</a></p>
+                    </li>
+                    <li>
+                        <p><a href="#du-an-tuong-tu">Dự án lân cận</a></p>
+                    </li>
+                </ul>
+                <div class="btn-sticky-header">
+                    @if (string.IsNullOrWhiteSpace(Model.GiaBan) == false)
+                    {
+                        <span>Bán: </span> <span class="price-redRV">
+                            @Model.GiaBan
+                        </span>
+                    }
+                    @if (string.IsNullOrWhiteSpace(Model.GiaThue) == false)
+                    {
+                        <span>Cho thuê: </span> <span class="price-redRV">
+                            @Model.GiaThue
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<section id="sticky" class="bg-white">
+    <section class="width1140 padding-0-15">
+        <div class="right-content">
+            <div class="weonline247">
+                <p class="messa">Chúng tôi luôn sẵn sàng giải đáp cho bạn vì chúng tôi hoạt động 24/7</p>
+                <p class="close-blue">
+                    <a href="#" data-target="dismiss-tips"><i class="zmdi zmdi-close"></i></a>
+                </p>
+                <div class="arrow-cyan"></div>
+            </div>
+            <div class="fixed-form-r">
+                <div class="user-owner-list">
+                    <img class="ava-user" src="@Model.TaiKhoan.Avatar" alt="@Model.TaiKhoan.FullName @Model.TaiKhoan.POSITION"
+                         title="@Model.TaiKhoan.FullName @Model.TaiKhoan.POSITION">
+                    <div class="name-us">
+                        @Model.TaiKhoan.FullName
+                    </div>
+                    <p>@Model.TaiKhoan.POSITION</p>
+                </div>
+                <div class="form-info">
+                    <div class="proprety-form-contact" id="contact-now-fixed-form"></div>
+                </div>
+            </div>
+        </div>
+        <div class="left-content">
+            <h2 class="heading-02">Giới thiệu <span class="place-viral">@Model.Name</span></h2>
+            <div class="view-more-desc">
+                <p>@Model.Sumary</p>
+            </div>
+            @if (Model.ImageDuAns.Count() > 0)
+            {
+                <ul class="media-box">
+                    @foreach (var item in Model.ImageDuAns.Take(6))
+                    {
+                        <li class="w-50percent">
+                            <a href="#" data-target="view-photo"
+                               style="background: url('@item.Link') 50% / cover;">
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+            @foreach (var item in Model.InfoDuAns.GroupBy(q => q.Key.IDCategory).OrderBy(q => q.First().Key.Category.Rank))
+            {
+                if (item.First().Key.Category.State.Contains("list"))
+                {
+                    <div class="box-collapse">
+                        <h2 class="heading-02-rv">@item.First().Key.Category.Name <span class="place-viral">@Model.Name</span></h2>
+                        <div class="collapse">
+                            <input id="toggle" type="checkbox">
+                            <label for="toggle"></label>
+                            <div class="content" id="expand">
+                                <ul class="detail-more">
+                                    @foreach (var ob in item.OrderBy(q => q.Key.Rank))
+                                    {
+                                        <li>
+                                            <p class="left">@ob.Key.Name</p>
+                                            <p class="right">@ob.Value</p>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="box-collapse">
+                        <h2 class="heading-02-rv">@item.First().Key.Category.Name <span class="place-viral">@Model.Name</span></h2>
+                        <div class="collapse">
+                            <input id="toggle-02" type="checkbox">
+                            <label for="toggle-02"></label>
+                            <div class="content" id="expand-02">
+                                <ul class="detail-commodities">
+                                    @foreach (var ob in item.OrderBy(q => q.Key.Rank))
+                                    {
+                                        <li>@ob.Value</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+            @if (Model.Investor != null)
+            {
+                <div class="box-collapse">
+                    <h2 class="heading-02-rv">Chủ đầu tư <span class="place-viral">@Model.Investor.Name</span></h2>
+                    <div class="collapse">
+                        <input id="toggle-05" type="checkbox">
+                        <label for="toggle-05"></label>
+                        <div class="content" id="expand-05">
+                            <div class="owner-project">
+                                <img src="@Model.Investor.Logo" alt="@Model.Investor.Name" title="@Model.Investor.Name">
+                                <div class="info-owner-project">
+                                    <p class="title"><strong>@Model.Investor.Name</strong></p>
+                                    <div>
+                                        <p>@Model.Investor.Sumary</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div id="vi-tri" class="box-collapse">
+                <h2 class="heading-02-rv">Vị trí dự án <span class="place-viral">Vinhomes Central Park</span></h2>
+                <div class="collapse">
+                    <input id="toggle-04" type="checkbox" checked>
+                    <label for="toggle-04"></label>
+                    <div class="content" id="expand-04">
+                        <div class="project-location">
+                            <div class="map-loca-project">
+                                <div id="render-map" class="location-map"></div>
+                                <div class="address-project">
+                                    <div class="left-70">
+                                        <i class="zmdi zmdi-hc-2x zmdi-pin rever-red"></i>
+                                        <strong>@Model.xAddress3.Name, @Model.xAddress2.Name, @Model.xAddress1.Name</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="location-around hidden"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+@Html.Action("More", "DuAn", new { IDDuAn = Model.IDDuAn })
+
+
+<div id="contact-project-form" class="mdialog">
+    <div class="popup-520">
+        <div class="header-w-close">
+            <button class="close-popup-btn"><i class="zmdi zmdi-hc-2x zmdi-close"></i></button>
+            <h3 class="font-tiempos">Liên hệ chuyên viên T-House</h3>
+        </div>
+        <div class="form-info">
+            <div class="box-form proprety-form-contact" id="contact-now-form-body"></div>
+        </div>
+    </div>
+</div>
+<div id="contact-property-form" class="mdialog">
+    <div class="popup-520">
+        <div class="form-signup">
+            <div class="title">
+                Liên hệ chuyên viên T-House
+                <a href="#" class="actionIcon close" title="Đóng"></a>
+            </div>
+            <div class="form-info">
+                <div class="box-form proprety-form-contact" id="contact-property-form-body">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="post-share-btn-group aj-post-share-btn-group">
+    <div class="btn-group btn-share-group addthis_toolbox addthis_default_style" addthis:title="Căn hộ Vinhomes Central Park Bình Thạnh" addthis:description="Bán và cho thuê căn hộ Vinhomes Central Park Bình Thạnh, giá bán các loại căn 1 2 3 phòng ngủ, xem vị trí, tiện ích và đánh giá về Vinhomes Central Park">
+        <ul class="post-share-buttons">
+            <li>
+                <a class="addthis_button_facebook kmq-blog-post-share-post facebook-color"> <i class="zmdi zmdi-facebook"></i></a>
+            </li>
+            <li>
+                <a class="addthis_button_messenger kmq-blog-post-share-post twitter-color">
+                    <img width="90%" src="https://static.reverland.com/images/fb_message.svg" alt="messenger" title="messenger" />
+                </a>
+            </li>
+            <li>
+                <a class="addthis_button_google_plusone_share kmq-blog-post-share-post googleplus-color"> <i class="zmdi zmdi-hc-2x zmdi-google-plus"></i></a>
+            </li>
+            <li>
+                <a class="addthis_button_sms kmq-blog-post-share-post in-color"> <i class="zmdi zmdi-hc-2x zmdi-comment-text"></i></a>
+            </li>
+            <li>
+                <a class="addthis_button_mailto kmq-blog-post-share-post gray "> <i class="zmdi zmdi-hc-2x zmdi-email"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
